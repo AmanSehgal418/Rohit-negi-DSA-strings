@@ -249,4 +249,183 @@ class Solution
     
 } 
 
-7.
+7.REVERSE WORDS IN A GIVEN STRING:-
+
+class Solution 
+{
+    //Function to reverse words in a given string.
+    String reverseWords(String S)
+    {
+        String [] str = S.split("[.]");
+         String temp = "";
+         
+         for(int i = str.length-1; i>=0; i--){
+             if(i!=0)
+               temp += str[i] + ".";
+               
+               else
+                 temp += str[i];
+                 
+         }
+         
+         return temp;
+    }
+}
+
+8.PALINDROME STRING:-
+
+class Solution {
+    int isPalindrome(String S) {
+        
+        int n = S.length() - 1;
+        int i=0, j=0;
+        
+        for(i=0, j=n; i<=j; i++, j--){
+            if(S.charAt(i) != S.charAt(j)){
+                return 0;
+            
+            }
+        }
+        return 1;
+    }
+};
+
+9.LONGEST COMMON PREFIX:=
+
+class Solution{
+    String longestCommonPrefix(String arr[], int n){
+    
+       // take temp_prefix string and assign first element of arr : a.
+       String result = arr[0];
+       
+       // Iterate for rest of element in string.
+       for(int i = 1; i < n; i++){
+            // .indexOf() return index of that substring from string.
+            while(arr[i].indexOf(result) != 0){
+               
+                // update matched substring prefx
+                result = result.substring(0, result.length()-1);
+               
+                // check for empty case. direct return if true..
+                if(result.isEmpty()){
+                    return "-1";
+                }
+            }
+        }
+        return result;
+    }
+}
+
+10.
+
+class Solution {
+    // Finds decimal value of a given roman numeral
+    public int romanToDecimal(String str) {
+        
+    HashMap<Character,Integer> map = new HashMap<Character,Integer>();
+    map.put('I', 1);
+    map.put('V', 5);
+    map.put('X', 10);
+    map.put('L', 50);
+    map.put('C', 100);
+    map.put('D', 500);
+    map.put('M', 1000);
+     int sum = 0;
+    int n = str.length();
+    for(int i = 0; i < n; i++)
+    {
+        // If present value is less than next value,
+        // subtract present from next value and add the
+        // resultant to the sum variable.
+        if (i != n - 1 && map.get(str.charAt(i)) <
+                          map.get(str.charAt(i + 1)))
+        {
+            sum += map.get(str.charAt(i + 1)) -
+                   map.get(str.charAt(i));
+            i++;
+        }
+        else
+        {
+            sum += map.get(str.charAt(i));
+        }
+    }
+    return sum;
+}
+}
+
+OR
+// Program to convert Roman
+// Numerals to Numbers
+import java.util.*;
+
+public class RomanToNumber {
+	// This function returns
+	// value of a Roman symbol
+	int value(char r)
+	{
+		if (r == 'I')
+			return 1;
+		if (r == 'V')
+			return 5;
+		if (r == 'X')
+			return 10;
+		if (r == 'L')
+			return 50;
+		if (r == 'C')
+			return 100;
+		if (r == 'D')
+			return 500;
+		if (r == 'M')
+			return 1000;
+		return -1;
+	}
+
+	// Finds decimal value of a
+	// given roman numeral
+	int romanToDecimal(String str)
+	{
+		// Initialize result
+		int res = 0;
+
+		for (int i = 0; i < str.length(); i++) {
+			// Getting value of symbol s[i]
+			int s1 = value(str.charAt(i));
+
+			// Getting value of symbol s[i+1]
+			if (i + 1 < str.length()) {
+				int s2 = value(str.charAt(i + 1));
+
+				// Comparing both values
+				if (s1 >= s2) {
+					// Value of current symbol
+					// is greater or equalto
+					// the next symbol
+					res = res + s1;
+				}
+				else {
+					// Value of current symbol is
+					// less than the next symbol
+					res = res + s2 - s1;
+					i++;
+				}
+			}
+			else {
+				res = res + s1;
+			}
+		}
+
+		return res;
+	}
+
+	// Driver Code
+	public static void main(String args[])
+	{
+		RomanToNumber ob = new RomanToNumber();
+
+		// Considering inputs given are valid
+		String str = "MCMIV";
+		System.out.println("Integer form of Roman Numeral"
+						+ " is "
+						+ ob.romanToDecimal(str));
+	}
+}
