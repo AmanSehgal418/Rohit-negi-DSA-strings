@@ -316,7 +316,7 @@ class Solution{
     }
 }
 
-10.
+10.ROMAN NUMBER TO INTEGER:-
 
 class Solution {
     // Finds decimal value of a given roman numeral
@@ -429,3 +429,53 @@ public class RomanToNumber {
 						+ ob.romanToDecimal(str));
 	}
 }
+
+11.LENGTH OF LAST WORD:-
+
+class Solution {
+    public int lengthOfLastWord(String s) {
+        
+        String S1 = s.trim();
+
+        char[] ch = S1.toCharArray();
+        int cnt = 0;
+
+        for(int i=ch.length-1; i>=0; i--){
+           cnt++;
+           if(ch[i] == ' '){
+               return cnt-1;
+           }
+        }
+        return cnt;
+    }
+}
+
+12.LENGTH OF LONGEST SUBSTRING WITHOUT REPEATING CHARACTERS:- 
+
+class Solution{
+    static int longestSubstrDistinctChars(String S){
+       
+       // Creating a set to store the last positions of occurrence
+    HashMap<Character, Integer> seen = new HashMap<>(); 
+    int maximum_length = 0;
+ 
+    // starting the initial point of window to index 0
+    int left = 0;
+ 
+    for(int right = 0; right < S.length(); right++)
+    {
+      // Checking if we have already seen the element or not
+      if(seen.containsKey(S.charAt(right)))
+      {
+        // If we have seen the number, move the start pointer
+        // to position after the last occurrence
+        left = Math.max(left, seen.get(S.charAt(right)) + 1);
+      }
+ 
+      // Updating the last seen value of the character
+      seen.put(S.charAt(right), right);
+      maximum_length = Math.max(maximum_length, right-left + 1);
+    }
+    return maximum_length;
+    }
+ }
