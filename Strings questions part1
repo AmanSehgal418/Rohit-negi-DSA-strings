@@ -664,4 +664,40 @@ class GFG {
 	}
 }
 
+17.GENERATE GREY CODE SEQUENCES:-
+
+class Solution
+{
+    ArrayList <String> generateCode(int n)
+    {
+        // Base case
+     if (n <= 0)
+    {
+      ArrayList<String> base =
+        new ArrayList<String>(){{add("0");}};
+      return base;
+    }
+    
+	 if(n == 1){
+	     ArrayList<String> base = new ArrayList<>();
+	     base.add("0");
+	     base.add("1");
+	     return base;
+	 }
+	 
+	 ArrayList<String> ans = generateCode(n-1);
+	 ArrayList<String> myans = new ArrayList<>();
+	 
+	 for(int i=0; i<ans.size(); i++){
+	     myans.add("0" + ans.get(i));
+	 }
+	 
+	 for(int i=ans.size()-1; i>=0; i--){
+	     myans.add("1" + ans.get(i));
+	 }
+	 
+	 return myans;
+    }
+    
+}
 
