@@ -479,3 +479,189 @@ class Solution{
     return maximum_length;
     }
  }
+
+13.Remove all duplicates from a given string:-
+
+class Solution {
+    String removeDuplicates(String str) {
+        
+   
+        String s = new String();
+        int len = str.length();
+         
+        // loop to traverse the string and
+        // check for repeating chars using
+        // IndexOf() method in Java
+        for (int i = 0; i < len; i++)
+        {
+            // character at i'th index of s
+            char c = str.charAt(i);
+             
+            // if c is present in str, it returns
+            // the index of c, else it returns -1
+            if (s.indexOf(c) < 0)
+            {
+                // adding c to str if -1 is returned
+                s += c;
+            }
+        }
+         
+        return s;
+    }
+}
+ OR
+
+import java.util.*;
+ 
+class GFG {
+     
+    static void removeDuplicate(char str[], int n)
+    {
+       // Create a set using String characters
+    // excluding '\0'
+        HashSet<Character> s = new LinkedHashSet<>(n - 1);
+      // HashSet doesn't allow repetition of elements
+        for (char x : str)
+            s.add(x);
+ 
+        // Print content of the set
+        for (char x : s)
+            System.out.print(x);
+    }
+ 
+    // Driver code
+    public static void main(String[] args)
+    {
+        char str[] = "geeksforgeeks".toCharArray();
+        int n = str.length;
+ 
+        removeDuplicate(str, n);
+    }
+}
+ OR
+
+import java.util.*;
+ 
+class GFG{
+static char[] removeDuplicates(char []s,int n){
+  Map<Character,Integer> exists = new HashMap<>();
+ 
+  String st = "";
+  for(int i = 0; i < n; i++){
+    if(!exists.containsKey(s[i]))
+    {
+      st += s[i];
+      exists.put(s[i], 1);
+    }
+  }
+  return st.toCharArray();
+}
+
+14.MINIMUM NUMBER OF FLIPS:-
+
+class Solution {
+    public int minFlips(String S) {
+        // Code here
+        int flips=0;
+//         idea is to calculate string flips when the string starts from 1 and then use (length - calculated) to get the flips when the string starts from 0
+//         finally return the minimum
+        for(int i=0;i<S.length();i++)
+        {
+//             If there is a 0 at even index then we need to flip it
+            if(i%2==0)
+            {
+                if(S.charAt(i)=='0') flips++;
+            }
+//             If there is a 1 at odd index then we need to flip it
+            else if(i%2!=0)
+            {
+                if(S.charAt(i)=='1') flips++;
+            }
+        }
+//         minmum flips would either be the flips in making string start with 1 or with 0
+        return Math.min(flips,S.length()-flips);
+    }
+}
+
+15.META STRINGS:-
+
+class Solution 
+{ 
+    boolean metaStrings(String S1, String S2) 
+    { 
+        int i = 0;
+        int j = S1.length() - 1;
+        
+        if(S1.length() != S2.length()) return false;
+        if(S1.equals(S2)) return false;
+        
+        while(S1.charAt(i) == S2.charAt(i)) i++;
+        while(S1.charAt(j) == S2.charAt(j)) j--;
+         char[] arr = S1.toCharArray();
+         char temp = arr[i];
+         arr[i] = arr[j];
+         arr[j] = temp;
+         
+         String str = new String(arr);
+         if(str.equals(S2)) return true;
+         else{
+              return false;
+         }
+
+         
+    }
+} 
+
+16.SMALLEST SUBSTRING CONTAINING 0,1,2:-
+
+// Java program for above approach
+import java.util.*;
+class GFG {
+
+	// Function to find the length of the smallest substring
+	public static int smallestSubstring(String S)
+	{
+		int res = Integer.MAX_VALUE;
+
+		// To check 0, 1 and 2
+		boolean zero = false, one = false, two = false;
+
+		// To store indexes of 0, 1 and 2
+		int zeroindex = 0, oneindex = 0, twoindex = 0;
+		for (int i = 0; i < S.length(); i++) {
+			if (S.charAt(i) == '0') {
+				zero = true;
+				zeroindex = i;
+			}
+			else if (S.charAt(i) == '1') {
+				one = true;
+				oneindex = i;
+			}
+			else if (S.charAt(i) == '2') {
+				two = true;
+				twoindex = i;
+			}
+
+			// Calculating length
+			if (zero && one && two)
+				res = Math.min( res,
+					Math.max(zeroindex,Math.max(oneindex, twoindex))
+				- Math.min( zeroindex,Math.min(oneindex, twoindex)));
+		}
+
+		// In case if there is no substring that contains 0,1 and 2
+		if (res == Integer.MAX_VALUE)
+			return -1;
+		return res + 1;
+	}
+
+	// Driver Code
+	public static void main(String[] args)
+	{
+		String S = "01212";
+		// Function call
+		System.out.print(smallestSubstring(S));
+	}
+}
+
+
