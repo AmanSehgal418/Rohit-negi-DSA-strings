@@ -1,0 +1,50 @@
+Two priority queues are created to store lowercase and uppercase characters separately. 
+A priority queue is a container that stores elements in a particular order.
+In this case, we use a priority queue that stores elements in ascending order.
+
+class Solution
+{
+    //Function to perform case-specific sorting of strings.
+    public static String caseSort(String str)
+    {
+        int n = str.length();
+       
+        // Create two priority queues to store lowercase and
+        // uppercase characters separately
+        PriorityQueue<Character> lower
+            = new PriorityQueue<>();
+        PriorityQueue<Character> upper
+            = new PriorityQueue<>();
+ 
+        // Loop through the string and insert each character
+        // into the appropriate queue
+        for (int i = 0; i < n; i++) {
+            if (Character.isLowerCase(str.charAt(i))) {
+                lower.add(str.charAt(i));
+            }
+            else {
+                upper.add(str.charAt(i));
+            }
+        }
+ 
+        // Loop through the string again and replace each
+        // character with the next lowest or highest
+        // character in the appropriate queue
+        char[] sortedStr = new char[n];
+        for (int i = 0; i < n; i++) {
+            if (Character.isLowerCase(str.charAt(i))) {
+                sortedStr[i] = lower.poll();
+            }
+            else {
+                sortedStr[i] = upper.poll();
+            }
+        }
+ 
+        // Return the sorted string
+        return new String(sortedStr);
+    }    
+}
+
+Time Complexity: O(n log n), where n is the size of the string
+Auxiliary Space: O(n), space is used for implementing priority queue
+
