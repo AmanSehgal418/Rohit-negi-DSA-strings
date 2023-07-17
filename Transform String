@@ -1,0 +1,44 @@
+class Solution
+{
+    int transform (String A, String B)
+    {
+        // cod// This parts checks whether conversion is possible
+        // or not
+        if (A.length() != B.length())
+            return -1;
+ 
+        int count[] = new int[256];
+ 
+        // count characters in A
+        // subtract count for every character in B
+        for (int i = 0; i < A.length(); i++) {
+            count[A.charAt(i)]++;
+        }    
+          
+        for (int i = 0; i < B.length(); i++) {
+            count[B.charAt(i)]--;
+        }
+ 
+        // Check if all counts become 0
+        for (int i = 0; i < 256; i++)
+            if (count[i] != 0)
+                return -1;
+ 
+        int i = A.length() - 1, j = B.length() - 1, res = 0;
+ 
+        while (i >= 0) {
+            // If there is a mismatch, then keep
+            // incrementing result 'res' until B[j] is not
+            // found in A[0..i]
+            if (A.charAt(i) != B.charAt(j))
+                res++;
+            else
+                j--;
+            i--;
+        }
+        return res;
+    }
+}
+
+Time Complexity: O(n), please note that i is always decremented (in while loop and in if), and the for loop starts from n-1 and runs while i >= 0.
+Auxiliary Space: O(1).
