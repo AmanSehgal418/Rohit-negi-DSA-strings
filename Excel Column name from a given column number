@@ -1,0 +1,18 @@
+class Solution {
+    public String excelColumn(int N){
+        
+        StringBuilder ans = new StringBuilder();
+        
+        while(N!=0){
+            N--;
+            int mod = N%26;
+            ans.append((char)('A' + mod));
+            N=N/26;
+        }
+        
+        return ans.reverse().toString();
+    }
+}
+
+Time Complexity: O(log26n), as we are using a loop and in each traversal, we decrement by floor division of 26.
+Auxiliary Space: O(1), as we use extra space to store the result.
